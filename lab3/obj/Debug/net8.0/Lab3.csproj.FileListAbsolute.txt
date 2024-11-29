@@ -1,0 +1,15 @@
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/bin/Debug/net8.0/Lab3
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/bin/Debug/net8.0/Lab3.deps.json
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/bin/Debug/net8.0/Lab3.runtimeconfig.json
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/bin/Debug/net8.0/Lab3.dll
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/bin/Debug/net8.0/Lab3.pdb
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.GeneratedMSBuildEditorConfig.editorconfig
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.AssemblyInfoInputs.cache
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.AssemblyInfo.cs
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.csproj.CoreCompileInputs.cache
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.sourcelink.json
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.dll
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/refint/Lab3.dll
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.pdb
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/Lab3.genruntimeconfig.cache
+/home/konvovden/Desktop/Study/11-sem/iu7-expert-systems/lab3/obj/Debug/net8.0/ref/Lab3.dll

@@ -32,9 +32,10 @@ public class GraphDFSPathFinder
     public List<int> Find()
     {
         _openedNodes.Push(_startNode);
+        WriteNodesToConsole();
 
         while (_childFound && _solutionNotFound)
-        {
+        { 
             FindChild();
             
             if (!_solutionNotFound)
@@ -45,6 +46,7 @@ public class GraphDFSPathFinder
                 var currentNode = _openedNodes.Pop();
                 _closedNodes.Add(currentNode);
                 _childFound = true;
+                WriteNodesToConsole();
             }
         }
 
@@ -77,6 +79,15 @@ public class GraphDFSPathFinder
 
             if (edge.EndNode == _targetNode)
                 _solutionNotFound = false;
+
+            WriteNodesToConsole();
+
+            break;
         }
+    }
+
+    private void WriteNodesToConsole()
+    {
+        Console.WriteLine($"Opened: {string.Join(", ", _openedNodes)} | Closed: {string.Join(", ", _closedNodes)}");
     }
 }

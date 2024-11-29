@@ -20,7 +20,6 @@
           "net8.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
           "https://nexus.qoollo.com/repository/nuget/index.json": {}
         },
         "frameworks": {
@@ -54,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

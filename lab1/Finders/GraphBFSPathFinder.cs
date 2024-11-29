@@ -34,7 +34,8 @@ public class GraphBFSPathFinder
     public List<int> Find()
     {
         _openedNodes.Enqueue(_startNode);
-
+        WriteNodesToConsole();
+        
         while (_childFound && _solutionNotFound)
         {
             FindChild();
@@ -47,6 +48,7 @@ public class GraphBFSPathFinder
                 var currentNode = _openedNodes.Dequeue();
                 _closedNodes.Add(currentNode);
                 _childFound = true;
+                WriteNodesToConsole();
             }
         }
 
@@ -80,6 +82,10 @@ public class GraphBFSPathFinder
 
             if (edge.EndNode == _targetNode)
                 _solutionNotFound = false;
+            
+            WriteNodesToConsole();
+
+            break;
         }
     }
 
@@ -100,5 +106,10 @@ public class GraphBFSPathFinder
         result.Reverse();
         
         return result;
+    }
+
+    private void WriteNodesToConsole()
+    {
+        Console.WriteLine($"Opened: {string.Join(", ", _openedNodes)} | Closed: {string.Join(", ", _closedNodes)}");
     }
 }
