@@ -3,90 +3,58 @@ using Lab4.Models.Enums;
 
 namespace Lab4;
 
-public class Unifier
+public static class Unifier
 {
-    public void Unify(List<Disjunct> disjuncts)
+    public static Dictionary<string, Variable>? Unify(Predicate predicate1, Predicate predicate2)
     {
-        while (true)
+        int mainPredicate = 0;
+        
+        if (predicate1.Name != predicate2.Name)
+            return null;
+
+        if (predicate1.Sign == predicate2.Sign)
+            return null;
+
+        if (predicate1.Variables.Count != predicate2.Variables.Count)
+            return null;
+
+        var changes = new Dictionary<string, Variable>();
+
+        for (int i = 0; i < predicate1.Variables.Count(); i++)
         {
-            var disjunctUnification = FindDisjunctsToUnify(disjuncts);
+            var v1 = predicate1.Variables[i];
+            var v2 = predicate2.Variables[i];
 
-            if (disjunctUnification == null)
+            if (v1.Flag == Flag.Constant && v2.Flag == Flag.Constant) // Две константы
             {
-                Console.WriteLine("No disjuncts to unify:");
-                Console.WriteLine($"Disjuncts: {string.Join("   ", disjuncts)}");
-
-                break;
+                if (v1.Name != v2.Name)
+                    return null;
             }
-
-            Console.WriteLine($"Disjuncts: {string.Join("   ", disjuncts)}");
-            Console.WriteLine($"Unifying disjuncts: {disjunctUnification.MainDisjunct}    {disjunctUnification.TargetDisjunct}");
-            Console.WriteLine($"Unifying predicates: {disjunctUnification.MainPredicate}   {disjunctUnification.TargetPredicate}");
-
-            MakeUnification(disjuncts, disjunctUnification);
-            
-            Console.WriteLine("-----------------------------------------------");
-            
-        }
-    }
-
-    private void MakeUnification(List<Disjunct> disjuncts, DisjunctUnification unification)
-    {
-        disjuncts.Remove(unification.MainDisjunct);
-
-        unification.TargetDisjunct.Predicates.Remove(unification.TargetPredicate);
-
-        var changes = new Dictionary<string, string>();
-
-        for (var i = 0; i < unification.MainPredicate.Variables.Count; i++)
-        {
-            if (unification.TargetPredicate.Variables[i].Flag == Flag.NoValue)
+            else if (v1.Flag == Flag.Constant && v2.Flag == Flag.Variable) // Константа и переменная
             {
-                changes[unification.TargetPredicate.Variables[i].Name] =
-                    unification.MainPredicate.Variables[i].Name;
+                if (mainPredicate == 2)
+                    return null;
+                
+                mainPredicate = 1;
+                
+                changes[v2.Name] = v1;
             }
-                    
-        }
-
-        Console.WriteLine($"Changes: {string.Join(" ", changes.Select(kv => $"{kv.Key} -> {kv.Value}"))}");
-
-        foreach (var targetPredicate in unification.TargetDisjunct.Predicates)
-        {
-            foreach (var variable in targetPredicate.Variables)
+            else if (v1.Flag == Flag.Variable && v2.Flag == Flag.Constant) // Переменная и константа
             {
-                if (changes.TryGetValue(variable.Name, out var name))
-                {
-                    variable.Name = name;
-                    variable.Value = name;
-                    variable.Flag = Flag.Linked;
-                }
+                if (mainPredicate == 1)
+                    return null;
+
+                mainPredicate = 2;
+                
+                changes[v1.Name] = v2;
             }
-        }
-    }
-    
-    private DisjunctUnification? FindDisjunctsToUnify(List<Disjunct> disjuncts)
-    {
-        foreach (var mainDisjunct in disjuncts)
-        {
-            foreach (var mainPredicate in mainDisjunct.Predicates)
+            else if (v1.Flag == Flag.Variable && v2.Flag == Flag.Variable) // Две переменные
             {
-                if (mainPredicate.Variables.Any(v => v.Flag != Flag.HasValue))  
-                    continue;
-
-                foreach (var targetDisjunct in disjuncts)
-                {
-                    if (targetDisjunct == mainDisjunct)
-                        continue;
-                    
-                    foreach (var targetPredicate in targetDisjunct.Predicates)
-                    {
-                        if (mainPredicate.CanBeUnified(targetPredicate))
-                            return new DisjunctUnification(mainDisjunct, mainPredicate, targetDisjunct, targetPredicate);
-                    }
-                }
+                changes[v1.Name] = v2;
             }
         }
 
-        return null;
+
+        return changes;
     }
 }

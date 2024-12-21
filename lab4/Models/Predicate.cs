@@ -2,7 +2,7 @@ using Lab4.Models.Enums;
 
 namespace Lab4.Models;
 
-public class Predicate
+public class Predicate : IEquatable<Predicate>
 {
     public string Name { get; set; }
     public bool Sign { get; set; }
@@ -21,24 +21,10 @@ public class Predicate
         return $"{signString}{Name}({string.Join(", ", Variables)})";
     }
 
-    public bool CanBeUnified(Predicate other)
+    public bool Equals(Predicate? other)
     {
-        if (Name != other.Name)
-            return false;
-
-        if (Sign == other.Sign)
-            return false;
-
-        if (Variables.Count != other.Variables.Count)
-            return false;
-
-        for (var i = 0; i < Variables.Count; i++)
-        {
-            if (Variables[i].Flag == Flag.HasValue && other.Variables[i].Flag == Flag.HasValue &&
-                Variables[i].Value != other.Variables[i].Value)
-                return false;
-        }
-
-        return true;
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Name == other.Name && Sign == other.Sign && Variables.SequenceEqual(other.Variables);
     }
 }

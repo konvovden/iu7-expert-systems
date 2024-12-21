@@ -28,6 +28,6 @@ class Program
 
         var searcher = new Searcher(rules);
         
-        searcher.Search(nodes[14], [nodes[18], nodes[32], nodes[19], nodes[20]]);
+        searcher.Search(nodes[14], [nodes[5], nodes[6], nodes[3], nodes[2], nodes[18], nodes[32]]);
     }
 }

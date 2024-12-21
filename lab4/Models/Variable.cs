@@ -2,27 +2,26 @@ using Lab4.Models.Enums;
 
 namespace Lab4.Models;
 
-public class Variable
+public class Variable : IEquatable<Variable>
 {
     public string Name { get; set; }
-    public string Value { get; set; }
     public Flag Flag { get; set; }
 
-    public Variable(string name, string value = "", Flag flag = Flag.NoValue)
+    public Variable(string name, Flag flag = Flag.Variable)
     {
         Name = name;
-        Value = value;
         Flag = flag;
     }
 
     public override string ToString()
     {
-        return Flag switch
-        {
-            Flag.NoValue => Name,
-            Flag.Linked => Value,
-            Flag.HasValue => Value,
-            _ => Name
-        };
+        return Name;
+    }
+
+    public bool Equals(Variable? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return this.Name == other.Name && this.Flag == other.Flag;
     }
 }
